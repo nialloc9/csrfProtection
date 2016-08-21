@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- JQUERY -->
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+
+    <!-- JS AUTH -->
+    <script src="js/auth/csrf-token.auth.js"></script>
+
+    <!-- JS - CUSTOM -->
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <form action="loggedin.html" id="someTextForm">
+        <input type="text" name="someText" value="someText">
+        <input type="text" name="csrfToken" id="csrfToken" class="csrf-token"/>
+        <input type="button" id="submitButton" value="Submit"/>
+    </form>
+</body>
+</html>
