@@ -9,6 +9,16 @@ $(document).ready(function(){
         console.log("tokenCheck: " + tokenCheck + " found.");
     },300);
 
+    //CALL BACK FUNCTION TO BE USED
+    function handleCheckData(data){
+        //HERE ADD WHAT YOU WANT TO DO IF DATA IS TRUE OR FALSE
+        if(data == '1'){
+            console.log('csrf token confirmed');
+            $('#someTextForm').submit();
+        }else{
+            console.log('error confirming csrf token');
+        }
+    }
 
     //CHECK TOKEN
     $('#submitButton').click(function() {

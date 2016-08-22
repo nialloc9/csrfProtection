@@ -37,13 +37,3 @@ function renderCsrfToken(className, token){
         $(this).val(token);
     });
 }
-
-function handleCheckData(data){
-    //HERE ADD WHAT YOU WANT TO DO IF DATA IS TRUE OR FALSE
-    if(data == '1'){
-        console.log('csrf token confirmed');
-        $('#someTextForm').submit();
-    }else{
-        console.log('error confirming csrf token');
-    }
-}
