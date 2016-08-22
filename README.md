@@ -7,12 +7,40 @@ validating these to allow us access to the loggedin.html page.
 1. Make sure jQuery is available to use in your project.
 2. Include the js/auth/csrf-token.auth.js file in your project.
 3. Inlcude the js/index.js file or the code from it in your project
-4. Give every form that needs csrf protection a class of 'csrf-token' e.g 
+4. Give every form that needs csrf protection a class of 'csrf-token'.
+5. Give the button to be used an id of 'submitButton'
+6. Call function csrfTokenGenerate(pathToServerScript, inputClass)
+7. Set a timeout of 500 millisecnds and then grab the token that was rendered in the input box by csrfTokenGenerate()
+7. When you want to check tokens call function csrfTokenCheck(token, pathToServerScript, callBackFunctionName).
 
-        <input type="text" id="csrfToken" class="csrf-token"/>
-        
-5. Give the button to be used an id of 'submitButton' e.g
-        <input type="button" id="submitButton" value="Submit"/>
+# Example
+        $(document).ready(function(){
+                //GENERATE AND RENDER TOKEN
+                csrfTokenGenerate('php/auth/csrfToken.auth.php', 'csrf-token');
+
+                //GET TOKEN VALUE.. interestingly if we grab the value here straight away it will be undefined so we have to give it 0.3 seconds             to render first before we grab it.
+                var tokenCheck = '';
+                setTimeout(function(){
+                        tokenCheck = $('#csrfToken').val();
+                        console.log("tokenCheck: " + tokenCheck + " found.");
+                },300);
+
+                //CALL BACK FUNCTION TO BE USED
+                function handleCheckData(data){
+                        //HERE ADD WHAT YOU WANT TO DO IF DATA IS TRUE OR FALSE
+                        if(data == '1'){
+                                console.log('csrf token confirmed');
+                                $('#someTextForm').submit();
+                        }else{
+                                console.log('error confirming csrf token');
+                        }
+                }
+
+                //CHECK TOKEN
+                $('#submitButton').click(function() {
+                        csrfTokenCheck(tokenCheck, 'php/auth/csrfToken.auth.php', handleCheckData)
+                });
+        });
         
 # NB
 If you want to change the id of the button or the class name of the csrf-token input don't forget to update the code that came 
