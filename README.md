@@ -44,5 +44,5 @@ validating these to allow us access to the loggedin.html page.
         
 # NB
 If you want to change the id of the button or the class name of the csrf-token input don't forget to update the code that came 
-from js/index.j
+from js/index.js
     
