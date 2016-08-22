@@ -12,6 +12,6 @@ $(document).ready(function(){
 
     //CHECK TOKEN
     $('#submitButton').click(function() {
-        csrfTokenCheck(tokenCheck, 'php/auth/csrfToken.auth.php')
+        csrfTokenCheck(tokenCheck, 'php/auth/csrfToken.auth.php', handleCheckData)
     });
 });

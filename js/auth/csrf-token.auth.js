@@ -9,7 +9,7 @@ function csrfTokenGenerate(pathToServerScript, inputClass){
     });
 }
 
-function csrfTokenCheck(token, pathToServerScript){
+function csrfTokenCheck(token, pathToServerScript, functionName){
     $.post(
         pathToServerScript,
         {
@@ -23,7 +23,7 @@ function csrfTokenCheck(token, pathToServerScript){
     ).success(
         function(data){
             console.log("Successfully checked csrf token returned: " + data);
-            handleCheckData(data);
+            functionName(data);
         }
     );
 }
