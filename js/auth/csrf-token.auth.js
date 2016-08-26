@@ -2,10 +2,10 @@ function csrfTokenGenerate(pathToServerScript, inputClass){
     $.post(pathToServerScript, {
         task: 'csrfTokenGenerate'
     }).success(function(data){
-        console.log("Successfully generated csrf token returned: " + data);
+        console.log("Success: Generated csrf token returned: " + data);
         renderCsrfToken(inputClass, data);
     }).error(function(){
-        console.log('Error generating csrf token at csrf-token.js.');
+        console.log('Error: Generating csrf token at csrf-token.js.');
     });
 }
 
@@ -18,11 +18,11 @@ function csrfTokenCheck(token, pathToServerScript, functionName){
         }
     ).error(
         function(){
-            console.log('Error checking csrf token at csrf-token.js.');
+            console.log('Error: Checking csrf token at csrf-token.js.');
         }
     ).success(
         function(data){
-            console.log("Successfully checked csrf token returned: " + data);
+            console.log("Success: checked csrf token returned: " + data);
             functionName(data);
         }
     );

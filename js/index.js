@@ -14,9 +14,11 @@ $(document).ready(function(){
         //HERE ADD WHAT YOU WANT TO DO IF DATA IS TRUE OR FALSE
         if(data == '1'){
             console.log('csrf token confirmed');
+            //DO SOME AWESOME STUFF HERE LIKE CHECKING ALL INPUTS ARE FILLED IN... inputChecker available here: https://github.com/nialloc9/inputChecker
             $('#someTextForm').submit();
         }else{
             console.log('error confirming csrf token');
+            //DO SOME AWESOME STUFF HERE LIKE ADDING AN INFO MESSAGE... addInfoMessage available here: https://github.com/nialloc9/addInfoMessage
         }
     }
 
