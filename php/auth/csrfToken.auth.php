@@ -25,7 +25,7 @@
             //RETURN VALUE
             echo $csrf_token;
         }else{
-        echo '3';
+        echo 0;
         }
     }
 ?>

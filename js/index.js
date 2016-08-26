@@ -2,7 +2,8 @@ $(document).ready(function(){
     //GENERATE AND RENDER TOKEN
     csrfTokenGenerate('php/auth/csrfToken.auth.php', 'csrf-token');
 
-    //GET TOKEN VALUE.. interestingly if we grab the value here straight away it will be undefined so we have to give it 0.3 seconds to render first before we grab it.
+    //GET TOKEN VALUE.. interestingly if we grab the value here straight away it will be undefined so we have to give it 0.3 seconds to render first before we grab it. If any developer finds a better way of
+    //doing this please add. ^_^
     var tokenCheck = '';
     setTimeout(function(){
         tokenCheck = $('#csrfToken').val();
