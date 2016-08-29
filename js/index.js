@@ -18,7 +18,6 @@ $(document).ready(function(){
 
         //result boolean check.. result == true: csrf token is confirmed
         if(result){
-
             //do something here
         }else{
 
@@ -32,8 +31,8 @@ $(document).ready(function(){
         //result boolean check.. result == true: csrf token is confirmed
         if(result){
             //DO SOME AWESOME STUFF HERE LIKE CHECKING ALL INPUTS ARE FILLED IN... inputChecker available here: https://github.com/nialloc9/inputChecker
-
             console.log('csrf token confirmed');
+            $('#someTextForm').submit();
         }else{
             //DO SOME AWESOME STUFF HERE LIKE ADDING AN INFO MESSAGE... addInfoMessage available here: https://github.com/nialloc9/addInfoMessage
             console.log('error confirming csrf token');
