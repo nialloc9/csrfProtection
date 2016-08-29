@@ -10,8 +10,7 @@ validating these to allow us access to the loggedin.html page.
 4. Give every form that needs csrf protection a class of 'csrf-token'.
 5. Give the button to be used an id of 'submitButton'
 6. Call function csrfTokenGenerate(pathToServerScript, inputClass, callBackFunction)
-7. Set a timeout of 500 millisecnds and then grab the token that was rendered in the input box by csrfTokenGenerate()
-7. When you want to check tokens call function csrfTokenCheck(token, pathToServerScript, callBackFunction).
+8. When you want to check tokens call function csrfTokenCheck(token, pathToServerScript, callBackFunction).
 
 # csrfTokenGenerate Parameters
 
