@@ -3,19 +3,8 @@ $(document).ready(function(){
     //generate and render token
     csrfTokenGenerate('php/auth/csrfToken.auth.php', 'csrf-token', generateTokenCallBack);
 
-    //GET TOKEN VALUE.. interestingly if we grab the value here straight away it will be undefined so we have to give it 0.3 seconds to render first before we grab it. If any developer finds a better way of
-    //doing this please add. ^_^
-
-    var tokenCheck = '';
-    setTimeout(function(){
-        tokenCheck = $('#csrfToken').val();
-        console.log("tokenCheck: " + tokenCheck + " found.");
-    },300);
-
-
     //generate call back
     function generateTokenCallBack(result){
-
         //result boolean check.. result == true: csrf token is confirmed
         if(result){
             //do something here
@@ -41,6 +30,7 @@ $(document).ready(function(){
 
     //check token
     $('#myButton').click(function() {
+        tokenCheck = $('#csrfToken').val();
         csrfTokenCheck(tokenCheck, 'php/auth/csrfToken.auth.php', checkTokenCallBack)
     });
 });
