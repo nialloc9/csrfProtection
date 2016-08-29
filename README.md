@@ -9,41 +9,77 @@ validating these to allow us access to the loggedin.html page.
 3. Inlcude the js/index.js file or the code from it in your project
 4. Give every form that needs csrf protection a class of 'csrf-token'.
 5. Give the button to be used an id of 'submitButton'
-6. Call function csrfTokenGenerate(pathToServerScript, inputClass)
+6. Call function csrfTokenGenerate(pathToServerScript, inputClass, callBackFunction)
 7. Set a timeout of 500 millisecnds and then grab the token that was rendered in the input box by csrfTokenGenerate()
-7. When you want to check tokens call function csrfTokenCheck(token, pathToServerScript, callBackFunctionName).
+7. When you want to check tokens call function csrfTokenCheck(token, pathToServerScript, callBackFunction).
+
+# csrfTokenGenerate Parameters
+
+pathToServerScript: Path from file html file tocsrfToken.auth.php
+
+inputClass: Name of the class given to the input that we want hte token to appear in
+
+callBackFunction: Name of the callback function we will use
+
+
+# csrfTokenCheck Parameters
+
+token: the token that is in the hidden input
+
+pathToServerScript: Path from file html file tocsrfToken.auth.php
+
+callBackFunction: Name of the callback function we will use
+
+
 
 # Example
-        $(document).ready(function(){
-    //GENERATE AND RENDER TOKEN
-    csrfTokenGenerate('php/auth/csrfToken.auth.php', 'csrf-token');
+                $(document).ready(function(){
 
-    //GET TOKEN VALUE.. interestingly if we grab the value here straight away it will be undefined so we have to give it 0.3 seconds to render first before we grab it. If any developer finds a better way of
-    //doing this please add. ^_^
-    var tokenCheck = '';
-    setTimeout(function(){
-        tokenCheck = $('#csrfToken').val();
-        console.log("tokenCheck: " + tokenCheck + " found.");
-    },300);
+                    //generate and render token
+                    csrfTokenGenerate('php/auth/csrfToken.auth.php', 'csrf-token', generateTokenCallBack);
 
-    //CALL BACK FUNCTION TO BE USED
-    function handleCheckData(data){
-        //HERE ADD WHAT YOU WANT TO DO IF DATA IS TRUE OR FALSE
-        if(data == '1'){
-            console.log('csrf token confirmed');
-            //DO SOME AWESOME STUFF HERE LIKE CHECKING ALL INPUTS ARE FILLED IN... inputChecker available here: https://github.com/nialloc9/inputChecker
-            $('#someTextForm').submit();
-        }else{
-            console.log('error confirming csrf token');
-            //DO SOME AWESOME STUFF HERE LIKE ADDING AN INFO MESSAGE... addInfoMessage available here: https://github.com/nialloc9/addInfoMessage
-        }
-    }
+                    //GET TOKEN VALUE.. interestingly if we grab the value here straight away it will be undefined so we have to give it 0.3 seconds to render first before we grab it. If any developer finds a better way of
+                    //doing this please add. ^_^
 
-    //CHECK TOKEN
-    $('#submitButton').click(function() {
-        csrfTokenCheck(tokenCheck, 'php/auth/csrfToken.auth.php', handleCheckData)
-    });
-        });
+                    var tokenCheck = '';
+                    setTimeout(function(){
+                        tokenCheck = $('#csrfToken').val();
+                        console.log("tokenCheck: " + tokenCheck + " found.");
+                    },300);
+
+
+                    //generate call back
+                    function generateTokenCallBack(result){
+
+                        //result boolean check.. result == true: csrf token is confirmed
+                        if(result){
+
+                            //do something here
+                        }else{
+
+                            //do something here like redirecting the user with an error message
+                        }
+                    }
+
+                    //check call back function
+                    function checkTokenCallBack(result){
+
+                        //result boolean check.. result == true: csrf token is confirmed
+                        if(result){
+                            //DO SOME AWESOME STUFF HERE LIKE CHECKING ALL INPUTS ARE FILLED IN... inputChecker available here: https://github.com/nialloc9/inputChecker
+
+                            console.log('csrf token confirmed');
+                        }else{
+                            //DO SOME AWESOME STUFF HERE LIKE ADDING AN INFO MESSAGE... addInfoMessage available here: https://github.com/nialloc9/addInfoMessage
+                            console.log('error confirming csrf token');
+                        }
+                    }
+
+                    //check token
+                    $('#myButton').click(function() {
+                        csrfTokenCheck(tokenCheck, 'php/auth/csrfToken.auth.php', checkTokenCallBack)
+                    });
+                });
         
 # NB
 If you want to change the id of the button or the class name of the csrf-token input don't forget to update the code that came 
