@@ -1,4 +1,3 @@
-//TOKEN GENERATE
 function csrfTokenGenerate(pathToServerScript, inputClass, callBackFunction){
     $.post(pathToServerScript, {
         task: 'csrfTokenGenerate'
@@ -8,17 +7,17 @@ function csrfTokenGenerate(pathToServerScript, inputClass, callBackFunction){
         renderCsrfToken(inputClass, token);
 
        //callback function
-        callBackFunction(true);
+       if(token == ''){
+           callBackFunction(false);
+       }else{
+           callBackFunction(true);
+       }
     }).
         error(function(){
         console.log('ERROR: Generating csrf token at csrf-token.js.');
-
-        //callback function
-        callBackFunction(false);
     });
 }
 
-//TOKEN CHECK
 function csrfTokenCheck(token, pathToServerScript, callBackFunction){
     $.post(
         pathToServerScript,
@@ -48,7 +47,6 @@ function csrfTokenCheck(token, pathToServerScript, callBackFunction){
     );
 }
 
-//RENDER TOKEN
 function renderCsrfToken(className, token){
     //ASSIGN INPUT VARIABLE
     var input = '.' + className;

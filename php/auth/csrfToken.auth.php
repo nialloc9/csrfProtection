@@ -3,13 +3,14 @@
 
     //GENERATE TOKEN
     if(isset($_POST['task']) && $_POST['task'] == 'csrfTokenGenerate')  {
-        //ASSIGN VARIABLES
+
+        //assign variables
         $task = $_POST['task'];
 
-        $csrf_token = Token::generate();
+        $csrfToken = Token::generate();
 
-        //RETURN VALUE
-        echo $csrf_token;
+        //return value
+        echo $csrfToken;
     }
 
     //task check
