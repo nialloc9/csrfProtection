@@ -1,15 +1,25 @@
-function csrfTokenGenerate(pathToServerScript, inputClass){
+//TOKEN GENERATE
+function csrfTokenGenerate(pathToServerScript, inputClass, callBackFunction){
     $.post(pathToServerScript, {
         task: 'csrfTokenGenerate'
-    }).success(function(data){
-        console.log("Success: Generated csrf token returned: " + data);
-        renderCsrfToken(inputClass, data);
-    }).error(function(){
-        console.log('Error: Generating csrf token at csrf-token.js.');
+    }).
+        success(function(token){
+        console.log("SUCCESS: Generated csrf token returned: " + token);
+        renderCsrfToken(inputClass, token);
+
+       //callback function
+        callBackFunction(true);
+    }).
+        error(function(){
+        console.log('ERROR: Generating csrf token at csrf-token.js.');
+
+        //callback function
+        callBackFunction(false);
     });
 }
 
-function csrfTokenCheck(token, pathToServerScript, functionName){
+//TOKEN CHECK
+function csrfTokenCheck(token, pathToServerScript, callBackFunction){
     $.post(
         pathToServerScript,
         {
@@ -18,16 +28,27 @@ function csrfTokenCheck(token, pathToServerScript, functionName){
         }
     ).error(
         function(){
-            console.log('Error: Checking csrf token at csrf-token.js.');
+            console.log('ERROR: Checking csrf token at csrf-token.js.');
         }
     ).success(
         function(data){
-            console.log("Success: checked csrf token returned: " + data);
-            functionName(data);
+
+            var result = false;
+
+            //data check
+            if(data == 1){
+                result = true;
+            }
+
+            console.log("SUCCESS: Checked csrf token... calling callback function");
+
+            //callback function
+            callBackFunction(result);
         }
     );
 }
 
+//RENDER TOKEN
 function renderCsrfToken(className, token){
     //ASSIGN INPUT VARIABLE
     var input = '.' + className;

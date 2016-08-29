@@ -12,20 +12,23 @@
         echo $csrf_token;
     }
 
-    //CHECK TOKEN
+    //task check
     if(isset($_POST['task']) && $_POST['task'] == 'csrfTokenCheck')  {
-        //DATA CHECK
+
+        //data check
         if(isset($_POST['token']) && !empty($_POST['token'])){
-            //ASSIGN VARIABLES
+
+            //assign variables
             $task = $_POST['task'];
             $token = $_POST['token'];
 
-            $csrf_token = Token::check($token);
 
-            //RETURN VALUE
-            echo $csrf_token;
+            $result = Token::check($token);
+
+            //return value
+            echo $result;
         }else{
-        echo 0;
+            echo 0;
         }
     }
 ?>
